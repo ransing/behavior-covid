@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 const FirstStep = ({
   handleNext,
   handleChange,
-  values: { interest, lastName, email, gender },
+  values: { interest},
   filedError,
   isError
 }) => {
@@ -57,23 +57,23 @@ const FirstStep = ({
 
   const marks = [
     {
-      value: 1,
+      value: "1",
       label: "Not At All"
     },
     {
-      value: 2,
-      label: " "
+      value: "2",
+      label: "<>"
     },
     {
-      value: 3,
+      value: "3",
       label: "Somewhat"
     },
     {
-      value: 4,
-      label: " "
+      value: "4",
+      label: "<>"
     },
     {
-      value: 5,
+      value: "5",
       label: "A lot "
     }
   ];
@@ -88,11 +88,13 @@ const FirstStep = ({
           <PrettoSlider
             valueLabelDisplay="auto"
             aria-label="pretto slider"
-            defaultValue={3}
+            name="interest"
+            defaultValue={interest}
             max={5}
             min={1}
             marks={marks}
-            onChange={handleChange(marks.value)}
+            // onChange={handleChange("interest")}
+            // valueLabelDisplay="on"
             // {handleChange("interest")}
           />
           {/* <div className={classes.margin} /> */}
@@ -111,8 +113,8 @@ const FirstStep = ({
             required
           /> */}
         </Grid>
-        {/* <Grid item xs={12} sm={6}>
-          <TextField
+        <Grid item xs={12} sm={6}>
+          {/* <TextField
             fullWidth
             label="Last Name"
             name="lastName"
@@ -125,8 +127,8 @@ const FirstStep = ({
               filedError.lastName !== "" ? `${filedError.lastName}` : ""
             }
             required
-          />
-        </Grid> */}
+          /> */}
+        </Grid>
 
         {/* <Grid item xs={12} sm={6}>
           <TextField

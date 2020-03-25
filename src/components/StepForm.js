@@ -14,11 +14,11 @@ const emailRegex = RegExp(/^[^@]+@[^@]+\.[^@]+$/);
 const phoneRegex = RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4,6})$/);
 // Step titles
 const labels = [
-  "First Step",
-  "Second Step",
-  "Third Step",
-  "Fourth Step",
-  "Fifth Step",
+  "Interest",
+  "Feeling Blue",
+  "Sleep",
+  "Energy",
+  "Appetite",
   "Confirmation"
 ];
 
@@ -28,10 +28,11 @@ const StepForm = () => {
     // interest: "",
     // lastName: "",
     // email: "",
-    interest: '', 
-    gender: "",
-    date: "",
-    city: "",
+    interest: "2", 
+    depression: "",
+    sleep: "",
+    energy: "",
+    appetite: "",
     // phone: ""
   });
   // Copy fields as they all have the same name
@@ -47,47 +48,50 @@ const StepForm = () => {
   const handleBack = () => setSteps(steps - 1);
 
   // Handle fields change
-  const handleChange = value => ({ target: { value } }) => {
+  const handleChange = input => ({ 
+           target: { value } 
+        }) => {
     // Set values to the fields
-    console.log(value)
+    console.log(input, value)
     setFields({
       ...fields,
-      [value]: value
+      // [input]: value
+      [input]: value
     });
 
     // Handle errors
     const formErrors = { ...filedError };
-    // const lengthValidate = value.length > 0 && value.length < 5;
+    const lengthValidate = value.length > 0 && value.length < 5;
 
-    // switch (input) {
-      // case "interest":
-      //   formErrors.interest = lengthValidate
-      //     ? "Minimum 3 characaters required"
-      //     : "";
-      //   break;
-      // case "lastName":
-      //   formErrors.lastName = lengthValidate
-      //     ? "Minimum 3 characaters required"
-      //     : "";
-      //   break;
-      // case "email":
-      //   formErrors.email = emailRegex.test(value)
-      //     ? ""
-      //     : "Invalid email address";
-      //   break;
-      // case "phone":
-      //   formErrors.phone = phoneRegex.test(value)
-      //     ? ""
-      //     : "Please enter a valid phone number. i.e: xxx-xxx-xxxx";
-      //   break;
-      // case "city":
-      //   formErrors.city = lengthValidate
-      //     ? "Minimum 3 characaters required"
-      //     : "";
-      //   break;
-    //   default: 
-    //     break;
-    // }
+    switch (input) {
+      case "interest":
+        formErrors.interest = lengthValidate
+          ? "Minimum 3 characaters required"
+          : "";
+        break;
+      case "lastName":
+        formErrors.lastName = lengthValidate
+          ? "Minimum 3 characaters required"
+          : "";
+        break;
+      case "email":
+        formErrors.email = emailRegex.test(value)
+          ? ""
+          : "Invalid email address";
+        break;
+      case "phone":
+        formErrors.phone = phoneRegex.test(value)
+          ? ""
+          : "Please enter a valid phone number. i.e: xxx-xxx-xxxx";
+        break;
+      case "city":
+        formErrors.city = lengthValidate
+          ? "Minimum 3 characaters required"
+          : "";
+        break;
+      default: 
+        break;
+    }
 
     // set error hook
     Object.values(formErrors).forEach(error =>
